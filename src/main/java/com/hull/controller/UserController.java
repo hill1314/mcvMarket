@@ -61,6 +61,11 @@ public class UserController {
         return "user/userList";
     }
 
+    @RequestMapping("/userMng")
+    public Object userMng(){
+        return "user/userMng";
+    }
+
     @RequestMapping("/userList")
     @ResponseBody
     public Object userList(User user){

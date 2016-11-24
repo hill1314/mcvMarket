@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html class="no-js">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <title>Fullscreen Login</title>
@@ -43,7 +43,7 @@
                          src="<%=request.getContextPath()%>/getImgCode">
                 </div>
 
-                <button id="submit" type="button">Sign in</button>
+                <button id="submit" type="button">Sign in 登录</button>
             </form>
             <div class="connect">
                 <p>If we can only encounter each other rather than stay with each other,then I wish we had never encountered.</p>

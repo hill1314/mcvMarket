@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public int insertSelective(User record) {
         try {
-            record.setUserId(Tools.getUUID());
+//            record.setUserId(Tools.getUUID());    //自增长
             record.setCreateTime(new Date());
             return userMapper.insertSelective(record);
         } catch (Exception e) {

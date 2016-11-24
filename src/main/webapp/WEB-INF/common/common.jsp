@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/img/taohua.jpg" type="image/x-icon" />
 <script src="<%=request.getContextPath()%>/js/jquery-3.1.1.min.js"></script>

@@ -66,6 +66,8 @@
 <body>
 <div>
     <input type="button" id="doQuery" value="查询" onclick="doQuery()"/>
+    <input type="button" id="addUser" value="新增"
+           onclick="window.self.location='<%=request.getContextPath()%>/user/addUser';"/>
 </div>
 
 <div id="grid_array" style="margin:100px;"></div>
