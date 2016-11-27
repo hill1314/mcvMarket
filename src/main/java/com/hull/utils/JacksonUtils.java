@@ -40,6 +40,12 @@ public class JacksonUtils {
         return obj;
     }
 
+    public static Object json2Obj(String jsonStr, Class className) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Object obj = mapper.readValue(jsonStr, className);
+        return obj;
+    }
+
 
     public static void main(String[] args) {
         try {

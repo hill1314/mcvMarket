@@ -1,9 +1,13 @@
-package com.hull.entity;
+package com.hull.module;
+
+import com.hull.entity.OrderItem;
+import org.springframework.core.annotation.Order;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-public class MasterOrder {
+public class MasterOrderVo {
 
     private String orderNo;
 
@@ -20,6 +24,16 @@ public class MasterOrder {
     private BigDecimal payPrice;
 
     private String status;
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    private List<OrderItem> orderItems;
 
     public enum OrderStatus {
         INIT("初始化", "1"), NO_PAY("未支付", "2"), PART_PAY("部分支付", "3"), PAYED("已支付", "4");
