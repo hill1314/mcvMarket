@@ -62,15 +62,15 @@ public class UserServiceImpl implements UserService{
         return 0;
     }
 
-    @Override
-    public int updateByPrimaryKey(User record) {
-        try {
-            return userMapper.updateByPrimaryKey(record);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
+//    @Override
+//    public int updateByPrimaryKey(User record) {
+//        try {
+//            return userMapper.updateByPrimaryKey(record);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return 0;
+//    }
 
     @Override
     public List<User> selectAll(User user) {

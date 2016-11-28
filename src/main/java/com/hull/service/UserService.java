@@ -16,7 +16,7 @@ public interface UserService {
 
     int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+//    int updateByPrimaryKey(User record);
 
     List<User> selectAll(User user);
 }

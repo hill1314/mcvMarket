@@ -4,21 +4,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class PayInfo {
-    private String payId;
-
-    private String orderNo;
-
-    private BigDecimal orderAmount;
-
-    private BigDecimal owedAmount;
-
-    private BigDecimal payAmount;
-
-    private Date payTime;
-
-    private String payMan;
-
-    private String payDesc;
+    private String payId;       //订单支付信息ID
+    private String orderNo;     //订单号
+    private BigDecimal orderAmount; //订单总价
+    private BigDecimal owedAmount;  //欠款金额
+    private BigDecimal payAmount;   //已付金额
+    private Date payTime;           //支付时间
+    private String payMan;          //支付人
+    private String payDesc;         //备注
 
     public String getPayId() {
         return payId;

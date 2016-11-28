@@ -10,7 +10,7 @@ public interface UserMapper {
 
     int deleteByPrimaryKey(String userId) throws Exception;
 
-    int insert(User record) throws Exception;
+//    int insert(User record) throws Exception;
 
     int insertSelective(User record) throws Exception;
 
@@ -20,5 +20,5 @@ public interface UserMapper {
 
     int updateByPrimaryKeySelective(User record) throws Exception;
 
-    int updateByPrimaryKey(User record) throws Exception;
+//    int updateByPrimaryKey(User record) throws Exception;
 }

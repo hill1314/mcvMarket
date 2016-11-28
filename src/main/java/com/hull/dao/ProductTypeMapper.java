@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface ProductTypeMapper {
     int deleteByPrimaryKey(String prodTypeId) throws Exception;
 
-    int insert(ProductType record) throws Exception;
+//    int insert(ProductType record) throws Exception;
 
     int insertSelective(ProductType record) throws Exception;
 
@@ -15,5 +15,5 @@ public interface ProductTypeMapper {
 
     int updateByPrimaryKeySelective(ProductType record) throws Exception;
 
-    int updateByPrimaryKey(ProductType record) throws Exception;
+//    int updateByPrimaryKey(ProductType record) throws Exception;
 }

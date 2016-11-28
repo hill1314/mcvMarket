@@ -17,7 +17,7 @@ public interface MasterOrderService {
 
     int updateByPrimaryKeySelective(MasterOrder record);
 
-    int updateByPrimaryKey(MasterOrder record);
+//    int updateByPrimaryKey(MasterOrder record);
 
     void createNewOrder(MasterOrderVo masterOrderVo) throws Exception;
 }

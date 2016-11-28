@@ -8,7 +8,7 @@ import com.hull.entity.Product;
 public interface ProductService {
     int deleteByPrimaryKey(String prodId);
 
-    int insert(Product record);
+//    int insert(Product record);
 
     int insertSelective(Product record);
 
@@ -16,5 +16,5 @@ public interface ProductService {
 
     int updateByPrimaryKeySelective(Product record);
 
-    int updateByPrimaryKey(Product record);
+//    int updateByPrimaryKey(Product record);
 }

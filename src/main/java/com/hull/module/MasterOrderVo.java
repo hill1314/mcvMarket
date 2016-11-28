@@ -9,21 +9,15 @@ import java.util.List;
 
 public class MasterOrderVo {
 
-    private String orderNo;
-
-    private Date createTime;
-
-    private Date payTime;
-
-    private String userId;
-
-    private BigDecimal totalPrice;
-
-    private BigDecimal realyPrice;
-
-    private BigDecimal payPrice;
-
-    private String status;
+    private String orderNo;     // 订单号
+    private Date createTime;    //创建时间
+    private Date payTime;       //支付时间
+    private String userId;      //用户ID
+    private BigDecimal totalPrice;  //订单计算总价
+    private BigDecimal realyPrice;  //实际结算价格
+    private BigDecimal payPrice;    //初始支付金额
+    private String status;          //订单状态
+    private String note;        //备注信息
 
     public List<OrderItem> getOrderItems() {
         return orderItems;
@@ -107,6 +101,14 @@ public class MasterOrderVo {
 
     public void setRealyPrice(BigDecimal realyPrice) {
         this.realyPrice = realyPrice;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public BigDecimal getPayPrice() {

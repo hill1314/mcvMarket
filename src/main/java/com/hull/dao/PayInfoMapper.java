@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface PayInfoMapper {
     int deleteByPrimaryKey(String payId) throws Exception;
 
-    int insert(PayInfo record) throws Exception;
+//    int insert(PayInfo record) throws Exception;
 
     int insertSelective(PayInfo record) throws Exception;
 
@@ -15,5 +15,5 @@ public interface PayInfoMapper {
 
     int updateByPrimaryKeySelective(PayInfo record) throws Exception;
 
-    int updateByPrimaryKey(PayInfo record) throws Exception;
+//    int updateByPrimaryKey(PayInfo record) throws Exception;
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface MasterOrderMapper {
     int deleteByPrimaryKey(String orderNo) throws Exception;
 
-    int insert(MasterOrder record) throws Exception;
+//    int insert(MasterOrder record) throws Exception;
 
     int insertSelective(MasterOrder record) throws Exception;
 
@@ -15,5 +15,5 @@ public interface MasterOrderMapper {
 
     int updateByPrimaryKeySelective(MasterOrder record) throws Exception;
 
-    int updateByPrimaryKey(MasterOrder record) throws Exception;
+//    int updateByPrimaryKey(MasterOrder record) throws Exception;
 }

@@ -5,47 +5,14 @@ import java.util.Date;
 
 public class MasterOrder {
 
-    private String orderNo;
-
-    private Date createTime;
-
-    private Date payTime;
-
-    private String userId;
-
-    private BigDecimal totalPrice;
-
-    private BigDecimal realyPrice;
-
-    private BigDecimal payPrice;
-
-    private String status;
-
-    public enum OrderStatus {
-        INIT("初始化", "1"), NO_PAY("未支付", "2"), PART_PAY("部分支付", "3"), PAYED("已支付", "4");
-
-        private String desc ;
-        private String value ;
-
-        OrderStatus(String desc, String index) {
-            this.desc = desc ;
-            this.value = value ;
-        }
-
-        public String getDesc() {
-            return desc;
-        }
-        public void setDesc(String desc) {
-            this.desc = desc;
-        }
-        public String getValue() {
-            return value;
-        }
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-    }
+    private String orderNo;     // 订单号
+    private Date createTime;    //创建时间
+    private Date payTime;       //支付时间
+    private String userId;      //用户ID
+    private BigDecimal totalPrice;  //订单计算总价
+    private BigDecimal realyPrice;  //实际结算价格
+    private BigDecimal payPrice;    //初始支付金额
+    private String status;          //订单状态
 
     public String getOrderNo() {
         return orderNo;

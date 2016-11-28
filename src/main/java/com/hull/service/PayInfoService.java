@@ -8,7 +8,7 @@ import com.hull.entity.PayInfo;
 public interface PayInfoService {
     int deleteByPrimaryKey(String payId);
 
-    int insert(PayInfo record);
+//    int insert(PayInfo record);
 
     int insertSelective(PayInfo record);
 
@@ -16,5 +16,5 @@ public interface PayInfoService {
 
     int updateByPrimaryKeySelective(PayInfo record);
 
-    int updateByPrimaryKey(PayInfo record);
+//    int updateByPrimaryKey(PayInfo record);
 }

@@ -8,7 +8,7 @@ import com.hull.entity.OrderItem;
 public interface OrderItemService {
     int deleteByPrimaryKey(String itemId);
 
-    int insert(OrderItem record);
+//    int insert(OrderItem record);
 
     int insertSelective(OrderItem record);
 
@@ -16,5 +16,5 @@ public interface OrderItemService {
 
     int updateByPrimaryKeySelective(OrderItem record);
 
-    int updateByPrimaryKey(OrderItem record);
+//    int updateByPrimaryKey(OrderItem record);
 }

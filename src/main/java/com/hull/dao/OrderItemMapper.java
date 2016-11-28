@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface OrderItemMapper {
     int deleteByPrimaryKey(String itemId) throws Exception;
 
-    int insert(OrderItem record) throws Exception;
+//    int insert(OrderItem record) throws Exception;
 
     int insertSelective(OrderItem record) throws Exception;
 
@@ -15,5 +15,5 @@ public interface OrderItemMapper {
 
     int updateByPrimaryKeySelective(OrderItem record) throws Exception;
 
-    int updateByPrimaryKey(OrderItem record) throws Exception;
+//    int updateByPrimaryKey(OrderItem record) throws Exception;
 }
