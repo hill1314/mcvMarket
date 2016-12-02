@@ -3,11 +3,11 @@ package com.hull.dao;
 import com.hull.entity.Product;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ProductMapper {
     int deleteByPrimaryKey(String prodId) throws Exception;
-
-//    int insert(Product record) throws Exception;
 
     int insertSelective(Product record) throws Exception;
 
@@ -15,5 +15,5 @@ public interface ProductMapper {
 
     int updateByPrimaryKeySelective(Product record) throws Exception;
 
-//    int updateByPrimaryKey(Product record) throws Exception;
+    List<Product> selectAll(Product prod);
 }

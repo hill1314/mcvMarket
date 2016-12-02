@@ -11,6 +11,7 @@ import com.hull.entity.Product;
 import com.hull.module.MasterOrderVo;
 import com.hull.utils.Tools;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.NumberUtils;
 
 import javax.annotation.Resource;
@@ -73,29 +74,7 @@ public class MasterOrderServiceImpl implements MasterOrderService {
         return 0;
     }
 
-//    @Override
-//    public int updateByPrimaryKey(MasterOrder record) {
-//        try {
-//            return masterOrderMapper.updateByPrimaryKey(record);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return 0;
-//    }
-
-    /**
-     * 新建订单
-     * @param masterOrderVo
-     * @throws Exception
-     */
-    @Override
-    public void createNewOrder(MasterOrderVo masterOrderVo) throws Exception {
-        //计算 标准价格 与 实际结算价格 的差价
-        BigDecimal cha = masterOrderVo.getTotalPrice().subtract(masterOrderVo.getRealyPrice());
-        if(MasterOrderVo.OrderStatus.PAYED.equals(masterOrderVo.getStatus())
-                && cha.compareTo(BigDecimal.TEN)>0){
-            //TODO 差值大于10
-        }
+    public String newOrder(MasterOrderVo masterOrderVo) throws Exception {
         //生成主订单号
         String masterOrderNo = Tools.getMasterOrderNo();
         //保存主订单
@@ -108,30 +87,52 @@ public class MasterOrderServiceImpl implements MasterOrderService {
         masterOrder.setPayPrice(masterOrderVo.getPayPrice());   //初始支付金额
         masterOrder.setStatus(masterOrderVo.getStatus());   //订单状态
         masterOrderMapper.insertSelective(masterOrder);
+        return masterOrderNo;
+    }
+
+    /**
+     * 新建订单
+     * @param masterOrderVo
+     * @throws Exception
+     */
+    @Override
+    @Transactional
+    public void createNewOrder(MasterOrderVo masterOrderVo) throws Exception {
+        //计算 标准价格 与 实际结算价格 的差价
+        BigDecimal cha = masterOrderVo.getTotalPrice().subtract(masterOrderVo.getRealyPrice());
+        if(MasterOrderVo.OrderStatus.PAYED.equals(masterOrderVo.getStatus())
+                && cha.compareTo(BigDecimal.TEN)>0){
+            //TODO 差值大于10
+        }
+        //保存主订单信息
+        String masterOrderNo = newOrder(masterOrderVo);
+
         //保存订单项
         List<OrderItem> orderItems = masterOrderVo.getOrderItems();
         int i = 0;
         for (OrderItem item : orderItems) {
+            //商品数量更新
             Product prod = productMapper.selectByPrimaryKey(item.getProdId());
-            OrderItem orderItem = new OrderItem();
-            orderItem.setProdId(item.getProdId());
-            orderItem.setProdPrice(prod.getStandPrice());
-            orderItem.setProdNum(item.getProdNum());
-            orderItem.setItemPrice(prod.getStandPrice().multiply(BigDecimal.valueOf(item.getProdNum())));
-            orderItem.setOrderNo(masterOrderNo);
-            orderItem.setItemId(Tools.getItemId(masterOrderNo,i));
-            orderItemMapper.insertSelective(orderItem);
+            prod.setStock(prod.getStock()-item.getProdNum());
+            productMapper.updateByPrimaryKeySelective(prod);
+            //保存订单项
+            item.setItemPrice(prod.getStandPrice().multiply(BigDecimal.valueOf(item.getProdNum())));
+            item.setOrderNo(masterOrderNo);
+            item.setItemId(Tools.getItemId(masterOrderNo,i));
+            orderItemMapper.insertSelective(item);
         }
-        //保存支付信息
-        PayInfo payInfo = new PayInfo();
-        payInfo.setPayId(Tools.getUUID());
-        payInfo.setOrderNo(masterOrderNo);  //关联订单号
-        payInfo.setOrderAmount(masterOrderVo.getRealyPrice());  //订单总价
-        payInfo.setPayAmount(masterOrderVo.getPayPrice());      //支付金额
-        payInfo.setOwedAmount(masterOrderVo.getRealyPrice().subtract(masterOrderVo.getPayPrice()));//欠款金额
-        payInfo.setPayMan(masterOrderVo.getUserId());   //支付人
-        payInfo.setPayTime(new Date());     //支付时间
-        payInfo.setPayDesc(masterOrderVo.getNote());    //支付备注
-        payInfoMapper.insertSelective(payInfo);
+        //有支付金额时，保存支付信息
+        if(masterOrderVo.getPayPrice().compareTo(BigDecimal.ZERO)>0){
+            PayInfo payInfo = new PayInfo();
+            payInfo.setPayId(Tools.getUUID());
+            payInfo.setOrderNo(masterOrderNo);  //关联订单号
+            payInfo.setOrderAmount(masterOrderVo.getRealyPrice());  //订单总价
+            payInfo.setPayAmount(masterOrderVo.getPayPrice());      //支付金额
+            payInfo.setOwedAmount(masterOrderVo.getRealyPrice().subtract(masterOrderVo.getPayPrice()));//欠款金额
+            payInfo.setPayMan(masterOrderVo.getUserId());   //支付人
+            payInfo.setPayTime(new Date());     //支付时间
+            payInfo.setPayDesc(masterOrderVo.getNote());    //支付备注
+            payInfoMapper.insertSelective(payInfo);
+        }
     }
 }

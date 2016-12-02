@@ -20,21 +20,20 @@
     });
     
     function loadData(dataJson) {
-        $.each(dataJson,function (n,user) {
-//            console.log(n,user);
-            user.operation="<a href=\"<%=request.getContextPath()%>/user/getUser?userId="+user.userId+"\">查看</a><br>"
-                    +"<a href=\"<%=request.getContextPath()%>/user/delUser?userId="+user.userId+"\">删除</a>";
+        $.each(dataJson,function (n,prod) {
+            console.log(n,prod);
+            prod.operation="<a href=\"<%=request.getContextPath()%>/prod/getProd?prodId="+prod.prodId+"\">查看</a><br>"
+                    +"<a href=\"<%=request.getContextPath()%>/prod/delProd?prodId="+prod.prodId+"\">删除</a>";
         });
 
-        var obj = { width: 1000, height: 800, title: "用户列表",resizable:true,draggable:true };
+        var obj = { width: 1000, height: 800, title: "产品列表",resizable:true,draggable:true };
         obj.colModel = [
-            { title: "用户ID", width: 100, dataType: "string", dataIndx: "userId" },
-            { title: "用户名称", width: 100,dataType: "string", dataIndx: "userName" },
-            { title: "登录帐号", width: 100,dataType: "string", dataIndx: "loginName" },
-            { title: "别名",width: 100,dataType: "string", dataIndx: "nickName" },
-            { title: "手机号",width: 100,dataType: "string", dataIndx: "telephone" },
-            { title: "电话",width: 100,dataType: "string", dataIndx: "phone" },
-            { title: "地址",width: 100,dataType: "string", dataIndx: "address" },
+            { title: "产品ID", width: 100, dataType: "string", dataIndx: "prodId" },
+            { title: "产品名称", width: 100,dataType: "string", dataIndx: "prodName" },
+            { title: "产品类型", width: 100,dataType: "string", dataIndx: "prodTypeId" },
+            { title: "标准价格",width: 100,dataType: "string", dataIndx: "standPrice" },
+            { title: "单位",width: 100,dataType: "string", dataIndx: "unitId" },
+            { title: "库存",width: 100,dataType: "string", dataIndx: "stock" },
             { title: "备注",width: 100,dataType: "string", dataIndx: "note" },
             { title: "操作",width: 100,dataType: "string", dataIndx: "operation" }
             ];
@@ -44,7 +43,7 @@
 
     function doQuery() {
         $.ajax({
-            url:"<%=request.getContextPath()%>/user/userList",
+            url:"<%=request.getContextPath()%>/prod/prodList",
             type: "POST",
             async:true,    //或false,是否异步
             data:"",
@@ -66,8 +65,8 @@
 <body>
 <div>
     <input type="button" id="doQuery" value="查询" onclick="doQuery()"/>
-    <input type="button" id="addUser" value="新增"
-           onclick="window.self.location='<%=request.getContextPath()%>/user/addUser';"/>
+    <input type="button" id="addProd" value="新增"
+           onclick="window.self.location='<%=request.getContextPath()%>/prod/addProd';"/>
 </div>
 
 <div id="grid_array" style="margin:100px;"></div>
