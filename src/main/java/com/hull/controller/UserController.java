@@ -44,6 +44,11 @@ public class UserController {
         return new ModelAndView("user/addUser");
     }
 
+    @RequestMapping("/listView")
+    public Object userListView(){
+        return "user/userList";
+    }
+
     @RequestMapping(value = "/saveUser",method = RequestMethod.POST)
     public Object saveUser(User user){
         logger.info("insert user .. ");
@@ -54,11 +59,6 @@ public class UserController {
         }else{
             return  "redirect:/user/addUser";
         }
-    }
-
-    @RequestMapping("/userListView")
-    public Object userListView(){
-        return "user/userList";
     }
 
     @RequestMapping("/userMng")

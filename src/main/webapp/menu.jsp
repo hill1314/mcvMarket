@@ -15,10 +15,10 @@
                 <div><span>用户管理</span><i class="fa fa-angle-right fa-lg"></i></div>
                 <div name="xz">
                     <div>
-                        <div><span>查询用户</span></div>
+                        <div><span><a href="<%=request.getContextPath()%>/user/listView">用户列表</a></span></div>
                     </div>
                     <div>
-                        <div><span>添加用户</span></div>
+                        <div><span><a href="<%=request.getContextPath()%>/user/addUser">添加用户</a></span></div>
                     </div>
                 </div>
             </div>
@@ -26,13 +26,13 @@
                 <div><span >商品管理</span><i class="fa fa-angle-right fa-lg"></i></div>
                 <div name="xz">
                     <div>
-                        <div><span>查询商品</span></div>
+                        <div><span><a href="<%=request.getContextPath()%>/prod/listView">商品列表</a></span></div>
                     </div>
                     <div>
-                        <div><span>新增商品</span></div>
+                        <div><span><a href="<%=request.getContextPath()%>/prod/addProd">新增商品</a></span></div>
                     </div>
                     <div>
-                        <div><span>进货</span></div>
+                        <div><span><a href="<%=request.getContextPath()%>/prod/addProd">进货</a></span></div>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <div><span>订单管理</span><i class="fa fa-angle-right fa-lg"></i></div>
                 <div name="xz">
                     <div>
-                        <div><span>新建订单</span></div>
+                        <div><span><a href="<%=request.getContextPath()%>/order/newOrder">新建订单</a></span></div>
                     </div>
                     <div>
                         <div><span>查询订单</span></div>
