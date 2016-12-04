@@ -11,6 +11,7 @@
     <title>prodInfo</title>
 </head>
 <body>
-    产品名称: ${product.prodName}
+    产品名称: ${product.prodName} <br>
+    <a href="javascript:history.back()">返回</a>
 </body>
 </html>

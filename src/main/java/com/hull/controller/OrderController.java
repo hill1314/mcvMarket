@@ -38,6 +38,7 @@ public class OrderController implements ILog{
 
     @RequestMapping("newOrder")
     public Object newOrder(Product product){
+        logger.info("new order page ...");
         ModelAndView view = new ModelAndView("order/newOrder");
         List<Product> prodList = productService.selectAll(product);
         view.addObject("prodList",prodList);

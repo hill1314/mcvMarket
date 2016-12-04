@@ -11,6 +11,7 @@
     <title>userInfo</title>
 </head>
 <body>
-    客户名称: ${user.userName}
+    客户名称: ${user.userName} <br>
+    <a href="javascript:history.back()">返回</a>
 </body>
 </html>
