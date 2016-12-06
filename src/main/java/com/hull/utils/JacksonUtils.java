@@ -24,7 +24,7 @@ public class JacksonUtils {
     public static String obj2Json(Object obj) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String jsonStr = mapper.writeValueAsString(obj);
-        System.out.println("Change Object to JSON String: " + jsonStr);
+//        System.out.println("Change Object to JSON String: " + jsonStr);
         return jsonStr;
     }
 
