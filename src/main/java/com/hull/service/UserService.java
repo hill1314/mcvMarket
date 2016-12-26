@@ -19,4 +19,6 @@ public interface UserService {
 //    int updateByPrimaryKey(User record);
 
     List<User> selectAll(User user);
+
+    public void test() throws Exception;
 }

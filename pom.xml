@@ -173,6 +173,26 @@
         </dependency>
     </dependencies>
 
+    <!--针对不同环境的打包配置-->
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <envLocation>local</envLocation>
+            </properties>
+            <activation>
+                <!--设置为默认-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>sit</id>
+            <properties>
+                <envLocation>sit</envLocation>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <finalName>market</finalName>
         <plugins>
@@ -182,9 +202,21 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <encoding>utf8</encoding>
                 </configuration>
             </plugin>
         </plugins>
+        <!--开启资源文件过滤-->
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>${project.basedir}/src/main/resources</directory>-->
+                <!--&lt;!&ndash;允许使用变量替换资源文件&ndash;&gt;-->
+                <!--<filtering>true</filtering>-->
+            <!--</resource>-->
+        <!--</resources>-->
+        <!--<filters>-->
+            <!--<filter>${project.basedir}/src/main/resources/env/${envLocation}/jdbc.properties</filter>-->
+        <!--</filters>-->
     </build>
 
 </project>
