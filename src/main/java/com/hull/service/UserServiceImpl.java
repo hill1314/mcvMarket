@@ -4,6 +4,7 @@ import com.hull.dao.UserMapper;
 import com.hull.entity.User;
 import com.hull.utils.Tools;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -62,15 +63,6 @@ public class UserServiceImpl implements UserService{
         return 0;
     }
 
-//    @Override
-//    public int updateByPrimaryKey(User record) {
-//        try {
-//            return userMapper.updateByPrimaryKey(record);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return 0;
-//    }
 
     @Override
     public List<User> selectAll(User user) {
@@ -81,5 +73,20 @@ public class UserServiceImpl implements UserService{
             e.printStackTrace();
         }
         return userList;
+    }
+
+    @Override
+    @Transactional
+    public void test() throws Exception {
+        User user = new User();
+        user.setUserId("99");
+        user.setUserName("99");
+        userMapper.insertSelective(user);
+        user.setUserId("100");
+        user.setUserName("100");
+        userMapper.insertSelective(user);
+        user.setUserId("100");
+        user.setUserName("100");
+        userMapper.insertSelective(user);
     }
 }

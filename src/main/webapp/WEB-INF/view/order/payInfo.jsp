@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
     <title>PayInfo</title>
@@ -13,21 +15,27 @@
 </head>
 <body>
 <div>
+    <form>
     <table>
         <thead>
             <tr>
-                <th>商品名</th> <th>商品类别</th> <th>单价</th><th>数量</th><th>总价</th>
+                <th>ID</th><th>商品名</th> <th>商品类别</th> <th>单价</th><th>数量</th><th>总价</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>玉米种子</td> <td>种子</td> <td>50</td><td>2</td><td>100</td>
-            </tr>
-            <tr>
-                <td>复合肥</td> <td>化肥</td> <td>100</td><td>2</td><td>200</td>
-            </tr>
+            <c:forEach var="product" items="${products}">
+                <tr>
+                    <td>${product.prodId}</td><td>${product.prodName}</td> <td>${product.prodTypeId}</td>
+                    <td><input type="text" id="${product.prodId}_standPrice" value="${product.standPrice}" disabled="true"/></td>
+                    <td><input type="text" id="${product.prodId}_num" value="1" onclick="calculate(this,${product.standPrice});"/></td>
+                    <td>
+                        <input type="text" id="${product.prodId}_itemPrice" value="${product.standPrice}" disabled="true"/>
+                    </td>
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
+    </form>
 </div>
 <div>
     合计总价：<input type="text" id="totalMoney" disabled="disabled" value="300">元 <br>
@@ -37,6 +45,16 @@
 </body>
 
 <script>
+    function calculate(obj,price) {
+        var num = obj.value;
+        var id = obj.id.replace("_num","_itemPrice");
+        var item = $("#"+id);
+        alert(typeof item);
+        console.log(item);
+//        alert(item[0].attributes.getNamedItem("value").value);
+//        $("#"+id+"_itemPrice").val(price*num);
+    }
+
     function submitOrder(submitType) {
         var jsonData={
             masterOrder:{

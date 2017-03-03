@@ -5,25 +5,16 @@ import java.util.Date;
 
 public class Product {
     private String prodId;
-
     private String prodTypeId;
-
     private String prodNo;
-
     private String prodName;
-
+    private BigDecimal inPrice;
     private BigDecimal standPrice;
-
     private String unitId;
-
-    private String desc;
-
+    private String notes;
     private String prodPic;
-
     private Integer stock;
-
     private Date createTime;
-
     private Date updateTime;
 
     public String getProdId() {
@@ -58,6 +49,13 @@ public class Product {
         this.prodName = prodName == null ? null : prodName.trim();
     }
 
+    public BigDecimal getInPrice(){
+        return this.inPrice;
+    }
+    public void setInPrice(BigDecimal inPrice){
+        this.inPrice = inPrice;
+    }
+
     public BigDecimal getStandPrice() {
         return standPrice;
     }
@@ -74,12 +72,12 @@ public class Product {
         this.unitId = unitId == null ? null : unitId.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setNotes(String notes) {
+        this.notes = notes == null ? null : notes.trim();
     }
 
     public String getProdPic() {

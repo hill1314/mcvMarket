@@ -1,10 +1,7 @@
 package com.hull.controller;
 
 import com.hull.entity.User;
-import com.hull.utils.ILog;
-import com.hull.utils.JacksonUtils;
-import com.hull.utils.StringUtil;
-import com.hull.utils.VerifyCodeUtils;
+import com.hull.utils.*;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +43,7 @@ public class LoginController implements ILog{
         Map<String,Object> resultMap = new HashMap<>();
         HttpSession session = request.getSession();
         String code = (String) session.getAttribute("verCode");
+
         //验证 验证码
         boolean codeResult = StringUtil.isEqual(userCode.toLowerCase(),code);
         if(!codeResult){
@@ -54,6 +52,8 @@ public class LoginController implements ILog{
         }else{
             //验证 用户名密码
             if("hull".equals(userName) && "123123".equals(password)){
+                session.setAttribute("EmpId","hull");
+                session.setAttribute("OperTime", Long.valueOf(DateUtil.getSysDate().getTime()));
                 resultMap.put("resultCode","0000");
                 resultMap.put("resultMsg","success");
             }else{

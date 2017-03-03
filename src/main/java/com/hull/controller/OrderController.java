@@ -37,8 +37,12 @@ public class OrderController implements ILog{
     OrderItemService orderItemService;
 
     @RequestMapping("newOrder")
-    public Object newOrder(){
-        return "order/newOrder";
+    public Object newOrder(Product product){
+        logger.info("new order page ...");
+        ModelAndView view = new ModelAndView("order/newOrder");
+        List<Product> prodList = productService.selectAll(product);
+        view.addObject("prodList",prodList);
+        return view;
     }
 
     @RequestMapping("payInfo")
@@ -58,48 +62,18 @@ public class OrderController implements ILog{
     @RequestMapping("payOrder")
     @ResponseBody
     public Object payOrder(MasterOrderVo orderInfo){
-//        try {
-//            HashMap<String,Object> paraMap = (HashMap<String, Object>) JacksonUtils.json2Obj(orderInfo,HashMap.class);
-//
-//            HashMap<String,String> order = (HashMap<String, String>) paraMap.get("masterOrder");
-//            String custId = order.get("custId");
-//            BigDecimal totalPrice = new BigDecimal(order.get("totalPrice").toString());
-//            BigDecimal realyPay = new BigDecimal(order.get("realyPay").toString());
-//            String status = order.get("status");
-//
-//            //保存主订单
-//            masterOrderService.createNewOrder(custId,totalPrice,realyPay,status);
-//
-//            ArrayList<HashMap<String,String>> orderItems = (ArrayList<HashMap<String, String>>) paraMap.get("orderItems");
-//
-//            for(HashMap<String,String> item : orderItems){
-//                String prodId =item.get("prodId");
-//                String prodNum = item.get("prodNum");
-//
-//                Product prod = productService.selectByPrimaryKey(prodId);
-//                OrderItem orderItem = new OrderItem();
-//                orderItem.setProdId(prodId);
-//                int num = NumberUtils.parseNumber(prodNum,Integer.class);
-//                orderItem.setProdNum(num);
-//                orderItem.setItemPrice(prod.getStandPrice().multiply(BigDecimal.valueOf(num)));
-//
-//
-////                orderItemService.insert();
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
         String jsonStr = "";
         HashMap<String,String> resultMap = new HashMap();
         resultMap.put("resultCode","0000");
         resultMap.put("resultMsg","success");
+
         try {
+            masterOrderService.createNewOrder(orderInfo);
             jsonStr = JacksonUtils.obj2Json(resultMap);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            resultMap.put("resultCode","0001");
+            resultMap.put("resultMsg","内部错误");
         }
         return jsonStr;
     }

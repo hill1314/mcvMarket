@@ -2,7 +2,6 @@ package com.hull.filter;
 
 import com.hull.utils.DateUtil;
 import com.hull.utils.PropertiesUtil;
-import com.hull.utils.SessionUtil;
 import com.hull.utils.StringUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,6 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,28 +90,28 @@ public class AuthCheckFilter implements Filter{
             log.debug("验证请求URL=" + request.getRequestURI());
         }
 
-        SessionUtil sessionUtil = new SessionUtil(request);
         if(this.checkRequestURIIntNotFilterList(request)) {
             chain.doFilter(request, response);
         } else {
-            if(sessionUtil.getObject("LoginInfo") == null) {
-                ServletException useredTime2 = new ServletException("121004");
+            HttpSession session = request.getSession();
+            if(session.getAttribute("EmpId")== null) {
+                ServletException useredTime2 = new ServletException("未登录");
                 log.info("验证不通过进入系统[srequest]=" + srequest, useredTime2);
                 throw useredTime2;
             }
 
             if(this.ENABLE_SESSION_TIME_OUT) {
                 boolean useredTime = this.checkSessionTimeOutFilter(request);
-                if(sessionUtil.getObject("OperTime") != null && useredTime) {
+                if(session.getAttribute("OperTime") != null && useredTime) {
                     Date nowDate = DateUtil.getSysDate();
-                    long diff = nowDate.getTime() - ((Long)sessionUtil.getObject("OperTime")).longValue();
+                    long diff = nowDate.getTime() - ((Long)session.getAttribute("OperTime")).longValue();
                     if(diff > this.time_out_ms) {
                         ServletException exception = new ServletException("121006");
                         log.info("session 超时 ! 请重新登陆! [srequest]=" + srequest, exception);
                         throw exception;
                     }
-
-                    sessionUtil.setAttr("OperTime", Long.valueOf(nowDate.getTime()));
+                    //用户操作时，刷新操作时间
+                    session.setAttribute("OperTime", Long.valueOf(nowDate.getTime()));
                 }
             }
 

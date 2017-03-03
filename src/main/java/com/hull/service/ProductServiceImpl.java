@@ -2,9 +2,14 @@ package com.hull.service;
 
 import com.hull.dao.ProductMapper;
 import com.hull.entity.Product;
+import com.hull.entity.User;
+import com.hull.utils.Tools;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/11/15.
@@ -24,14 +29,12 @@ public class ProductServiceImpl implements ProductService{
         return 0;
     }
 
-//    @Override
-//    public int insert(Product record) {
-//        return 0;
-//    }
 
     @Override
     public int insertSelective(Product record) {
         try {
+            record.setProdId(Tools.getUUID());
+            record.setCreateTime(new Date());
             return productMapper.insertSelective(record);
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,8 +62,15 @@ public class ProductServiceImpl implements ProductService{
         return 0;
     }
 
-//    @Override
-//    public int updateByPrimaryKey(Product record) {
-//        return 0;
-//    }
+    @Override
+    public List<Product> selectAll(Product prod) {
+        List<Product> prodList = new ArrayList<>();
+        try {
+            prodList = productMapper.selectAll(prod);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return prodList;
+    }
+
 }

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <title>newOrder</title>
@@ -14,11 +15,9 @@
 <body>
    选择商品：<br>
    <form>
-       <input name="prod" value="1" type=checkbox>玉米种子
-       <input name="prod" value="2" type=checkbox>复合肥
-       <input name="prod" value="3" type=checkbox>杀虫剂
-       <input name="prod" value="4" type=checkbox>喷壶器
-
+        <c:forEach var="product" items="${prodList}">
+            <input name="prod" value="${product.prodId}" type=checkbox>${product.prodName}
+        </c:forEach>
 
        <br><input value="购买" onclick=check("prod") type=button>
    </form>

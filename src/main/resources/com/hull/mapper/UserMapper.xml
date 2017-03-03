@@ -63,7 +63,7 @@
       </if>
     </where>
   </sql>
-  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.hull.entity.User" >
     select
     <include refid="Base_Column_List" />
     from user
