@@ -24,7 +24,7 @@
 
      <!-- 引入外部数据源配置信息 -->
       <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-         <property name="locations" value="classpath:jdbc.properties"/>
+         <property name="locations" value="classpath:*.properties"/>
      </bean>
      
      <!-- 1、数据源 -->
